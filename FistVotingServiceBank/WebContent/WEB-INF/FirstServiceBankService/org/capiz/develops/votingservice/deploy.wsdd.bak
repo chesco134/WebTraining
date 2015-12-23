@@ -1,0 +1,31 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from FirstServiceBankService WSDL service -->
+
+  <service name="FirstServiceBank" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://votingservice.develops.capiz.org"/>
+      <parameter name="wsdlServiceElement" value="FirstServiceBankService"/>
+      <parameter name="schemaQualified" value="http://votingservice.develops.capiz.org"/>
+      <parameter name="wsdlServicePort" value="FirstServiceBank"/>
+      <parameter name="className" value="org.capiz.develops.votingservice.FirstServiceBankSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="FirstServiceBank"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="guardarVoto" qname="operNS:guardarVoto" xmlns:operNS="http://votingservice.develops.capiz.org" returnQName="retNS:guardarVotoReturn" xmlns:retNS="http://votingservice.develops.capiz.org" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:voto" xmlns:pns="http://votingservice.develops.capiz.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:idVotacion" xmlns:pns="http://votingservice.develops.capiz.org" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:boleta" xmlns:pns="http://votingservice.develops.capiz.org" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <parameter name="allowedMethods" value="guardarVoto"/>
+
+  </service>
+</deployment>

@@ -1,0 +1,29 @@
+package org.capiz.develops.votingservice;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class FirstServiceBank {
+
+	private DatabaseConnection connection;
+
+	public boolean guardarVoto(String voto, int idVotacion, String boleta) {
+		boolean success = false;
+		connection = new DatabaseConnection("localhost", "HelloDatabase",
+				"root", "Chesco134");
+		Connection con = connection.getConnection();
+		if (con != null) {
+			try {
+				PreparedStatement st = con.prepareCall("Call guardaVoto(?,?,?);");
+				success = true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			connection.closeConnection();
+		} else {
+		}
+		return success;
+	}
+}
